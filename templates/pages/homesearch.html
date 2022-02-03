@@ -1,0 +1,39 @@
+{%extends 'base.html' %}
+{% load static %}
+
+{%block content%}
+    <h1 class="display-1 text-center">CRUD home</h1>
+    <div class="container">
+        <table class="table bg-dark text-light">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th><a href="{% url 'insert' %}" class="btn btn-primary">insert</a></th>
+                <th style="width: 20%"><div class="input-group ">
+
+<form action="{% url 'search' %}" method="get">
+  <input type="search" name="searched" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+</form>
+</div></th>
+            </tr>
+            </thead>
+            <tbody class="">
+            {%for user in  users%}
+                <tr class="table-dark">
+                    <td> {{user.id}}</td>
+                    <td>{{user.name}}</td>
+                    <td>{{user.email}}</td>
+                    <td>
+                        <a href="{% url 'delete' user.id %}" class="btn btn-danger">delete</a>
+                    </td>
+                    <td>
+                        <a href="{% url 'update' user.id %}" class="btn btn-warning">update</a>
+                    </td>
+                </tr>
+            {%endfor%}
+            </tbody>
+        </table>
+    </div>
+{%endblock%}
