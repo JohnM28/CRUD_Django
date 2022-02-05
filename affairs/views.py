@@ -47,7 +47,7 @@ def delete(request,id):
 def update(request,id):
     if(request.method=='GET'):
         context={}
-        user = myuser.objects.filter(id=id)
+        user = Students.objects.filter(id=id)
         for cred in user:
             context['track']= cred.track
             context['name'] = cred.name
