@@ -15,14 +15,21 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from affairs.views import registeruser,login,home,insert,delete,update,search
+from affairs.views import registeruser,login,home,insert,delete,update,search,log_out,insert_form,insert_model_form,add_admin,login_admin,MyUserList,TrackList
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('registeruser', registeruser),
-    path('login', login),
+    # path('registeruser', registeruser),
+    # path('login', login),
+    path('registeruser', add_admin),
+    path('login', login_admin),
+    path('log_out', log_out, name="log_out"),
     path('home', home),
+    path('tracklist', TrackList.as_view()),
+    path('userlist', MyUserList.as_view()),
     path('add', insert, name= "insert"),
+    path('addform', insert_form, name= "insert"),
+    path('addmodelform', insert_model_form, name= "insert"),
     path('delete/<id>', delete,name="delete"),
     path('update/<id>', update, name="update"),
     path('homesearch', search, name="search"),
