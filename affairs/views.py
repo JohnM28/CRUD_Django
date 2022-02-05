@@ -63,5 +63,6 @@ def update(request,id):
 def search(request):
     context = {}
     query = request.GET.get('searched')
+    print(query)
     context['users'] = Students.objects.filter(name=query)
     return render(request, 'pages/homesearch.html', context)
