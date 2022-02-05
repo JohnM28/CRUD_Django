@@ -9,13 +9,13 @@
         <form method="post"class = 'card p-3 bg-light' style="width: 60%">
         {%csrf_token %}
             <div class="form-group">
-                <label for="username">Username</label>
+                <label for="username">Student name</label>
                 <input type="text" class="form-control" name="username" value="{{name}}" style="width: 100%" placeholder="username">
             </div>
 
                 <div class="form-group ">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" name="email"   value="{{email}}" style="width: 100%" placeholder="Email">
+                    <label for="track">Track</label>
+                    <input type="text" class="form-control" name="track"   value="{{track}}" style="width: 100%" placeholder="track">
                 </div>
 
 

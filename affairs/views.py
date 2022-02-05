@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect
-from .models import myuser
+from .models import myuser,Students
 # Create your views here.
 def registeruser(request):
     if(request.method== 'GET'):
@@ -29,19 +29,19 @@ def login(request):
 
 def home(request):
     context = {}
-    context['users'] = myuser.objects.all()
+    context['users'] = Students.objects.all()
     return render(request, 'pages/home.html', context)
 
 def insert(request):
     if (request.method == 'GET'):
         return render(request, 'pages/insertform.html')
     else:
-        myuser.objects.create(name=request.POST['username'], email=request.POST['email'],password=request.POST['password'])
-        user = myuser.objects.all()
+        Students.objects.create(name=request.POST['username'], track=request.POST['track'])
+        user = Students.objects.all()
         return redirect('/home', {'users': user})
 
 def delete(request,id):
-    myuser.objects.filter(id=id).delete()
+    Students.objects.filter(id=id).delete()
     return redirect ('/home')
 
 def update(request,id):
@@ -49,19 +49,19 @@ def update(request,id):
         context={}
         user = myuser.objects.filter(id=id)
         for cred in user:
-            context['email']= cred.email
+            context['track']= cred.track
             context['name'] = cred.name
             print(context)
         return render (request,'pages/editform.html',context)
     else :
-        user=myuser.objects.get(id=id)
+        user=Students.objects.get(id=id)
         user.name=request.POST['username']
-        user.email=request.POST['email']
+        user.track=request.POST['track']
         user.save()
         return redirect('/home')
 
 def search(request):
     context = {}
     query = request.GET.get('searched')
-    context['users'] = myuser.objects.filter(name=query)
+    context['users'] = Students.objects.filter(name=query)
     return render(request, 'pages/homesearch.html', context)

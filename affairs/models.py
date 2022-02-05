@@ -7,3 +7,9 @@ class myuser(models.Model):
     password=models.CharField(max_length=20)
     email=models.CharField(max_length=20)
 
+
+class Students(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=20)
+    track = models.CharField(max_length=20)
+
